@@ -15,9 +15,12 @@ import {
 const navItems = [
   { href: "/", label: "Início", icon: Home },
   { href: "/services", label: "Serviços", icon: Sparkles },
+  { href: "/gallery", label: "Galeria", icon: Star },
+  { href: "/calculator", label: "Calculadora", icon: Car },
+  { href: "/testimonials", label: "Depoimentos", icon: User },
+  { href: "/maintenance", label: "Manutenção", icon: Sparkles },
+  { href: "/contact", label: "Contato", icon: Calendar },
   { href: "/booking", label: "Agendar", icon: Calendar },
-  { href: "/profile", label: "Perfil", icon: User },
-  { href: "/reviews", label: "Avaliações", icon: Star },
 ];
 
 export function Navigation() {

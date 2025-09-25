@@ -9,6 +9,12 @@ import { Layout } from "./components/Layout";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Booking from "./pages/Booking";
+import Gallery from "./pages/Gallery";
+import Testimonials from "./pages/Testimonials";
+import Contact from "./pages/Contact";
+import Calculator from "./pages/Calculator";
+import FAQ from "./pages/FAQ";
+import Maintenance from "./pages/Maintenance";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,22 +30,12 @@ const App = () => (
             <Route path="/" component={Home} />
             <Route path="/services" component={Services} />
             <Route path="/booking" component={Booking} />
-            <Route path="/profile">
-              <div className="min-h-screen flex items-center justify-center">
-                <div className="text-center">
-                  <h1 className="text-2xl font-bold mb-4">Perfil do Cliente</h1>
-                  <p className="text-muted-foreground">Em desenvolvimento...</p>
-                </div>
-              </div>
-            </Route>
-            <Route path="/reviews">
-              <div className="min-h-screen flex items-center justify-center">
-                <div className="text-center">
-                  <h1 className="text-2xl font-bold mb-4">Avaliações</h1>
-                  <p className="text-muted-foreground">Em desenvolvimento...</p>
-                </div>
-              </div>
-            </Route>
+            <Route path="/gallery" component={Gallery} />
+            <Route path="/testimonials" component={Testimonials} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/calculator" component={Calculator} />
+            <Route path="/faq" component={FAQ} />
+            <Route path="/maintenance" component={Maintenance} />
             <Route component={NotFound} />
           </Switch>
         </Layout>
