@@ -13,7 +13,11 @@ import {
   Users,
   Award,
   MapPin,
-  Calendar
+  Calendar,
+  Wrench,
+  Settings,
+  Hammer,
+  Drill
 } from "lucide-react";
 
 import heroImage from "@/assets/hero-image.jpg";
@@ -83,7 +87,7 @@ export default function Home() {
           <div className="space-y-6">
             <Badge variant="outline" className="glass">
               <Sparkles className="h-4 w-4 mr-1" />
-              Premium Car Detailing
+              Higienização • Estética • Marido de Aluguel
             </Badge>
             
             <h1 className="text-4xl md:text-6xl font-bold leading-tight">
@@ -92,8 +96,8 @@ export default function Home() {
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-              Serviços profissionais de detailing automotivo com produtos premium 
-              e tecnologia de ponta. Agende seu horário e deixe seu carro impecável.
+              Serviços profissionais de higienização de estofados, estética automotiva 
+              e marido de aluguel. Agende seu horário e deixe tudo impecável.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -145,7 +149,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Nossos Serviços
+              Nossos Serviços Automotivos
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Oferecemos uma gama completa de serviços profissionais para deixar seu veículo impecável
@@ -162,13 +166,88 @@ export default function Home() {
             ))}
           </div>
           
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 space-y-4">
             <Button 
               variant="outline" 
               size="lg"
               onClick={() => setLocation("/services")}
             >
-              Ver Todos os Serviços
+              Ver Serviços Automotivos
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+            <Button 
+              variant="premium" 
+              size="lg"
+              onClick={() => setLocation("/marido-aluguel")}
+            >
+              Ver Serviços de Marido de Aluguel
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Marido de Aluguel Section */}
+      <section className="py-16 px-6 bg-muted/10">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-4">
+              <Wrench className="h-4 w-4 mr-1" />
+              Novidade
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="gradient-text">Marido de Aluguel</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Agora também oferecemos serviços residenciais! Pequenos reparos e manutenções para sua casa
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="text-center card-hover bg-card/50 border-border/50">
+              <CardHeader>
+                <Settings className="h-12 w-12 text-primary mx-auto mb-4" />
+                <CardTitle>Serviços Elétricos</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Instalação de tomadas, interruptores, luminárias e pequenos reparos elétricos
+                </CardDescription>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center card-hover bg-card/50 border-border/50">
+              <CardHeader>
+                <Hammer className="h-12 w-12 text-primary mx-auto mb-4" />
+                <CardTitle>Reparos Gerais</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Conserto de torneiras, ajuste de portas, vedações e pequenos reparos
+                </CardDescription>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center card-hover bg-card/50 border-border/50">
+              <CardHeader>
+                <Drill className="h-12 w-12 text-primary mx-auto mb-4" />
+                <CardTitle>Montagem e Instalação</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Montagem de móveis, instalação de prateleiras e suportes para TV
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center mt-12">
+            <Button 
+              variant="premium" 
+              size="lg"
+              onClick={() => setLocation("/marido-aluguel")}
+            >
+              Ver Todos os Serviços de Marido de Aluguel
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
@@ -180,7 +259,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Por que escolher a Auto Clean Shine?
+              Por que escolher a Auto Limpeza Pro?
             </h2>
           </div>
           

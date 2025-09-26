@@ -25,7 +25,12 @@ const services = [
   "Enceramento Simples",
   "Enceramento & Polimento",
   "Pacote Executivo",
-  "Lavagem Express"
+  "Lavagem Express",
+  "Serviços Elétricos",
+  "Pintura e Acabamentos", 
+  "Montagem e Instalação",
+  "Reparos Gerais",
+  "Manutenção Preventiva"
 ];
 
 export default function Contact() {
@@ -109,7 +114,7 @@ export default function Contact() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-2">Envie um e-mail:</p>
-                <p className="font-semibold">contato@autocleanshinepro.com</p>
+                <p className="font-semibold">contato@autolimpezapro.com</p>
               </CardContent>
             </Card>
 

@@ -9,11 +9,11 @@ export function Footer() {
           {/* Empresa */}
           <div>
             <h3 className="text-lg font-bold mb-4 bg-gradient-shine bg-clip-text text-transparent">
-              Auto Clean Shine Pro
+              Auto Limpeza Pro
             </h3>
             <p className="text-muted-foreground mb-4">
-              Especialistas em lavagem e detailing automotivo. 
-              Cuidamos do seu veículo com a qualidade que ele merece.
+              Especialistas em higienização de estofados, estética automotiva e serviços de marido de aluguel. 
+              Cuidamos do que você mais precisa com a qualidade que merece.
             </p>
             <div className="flex gap-2">
               <Button variant="outline" size="sm">
@@ -34,12 +34,12 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Links Rápidos</h4>
             <ul className="space-y-2 text-muted-foreground">
-              <li><a href="/services" className="hover:text-foreground transition-colors">Serviços</a></li>
+              <li><a href="/services" className="hover:text-foreground transition-colors">Serviços Auto</a></li>
+              <li><a href="/marido-aluguel" className="hover:text-foreground transition-colors">Marido de Aluguel</a></li>
               <li><a href="/booking" className="hover:text-foreground transition-colors">Agendamento</a></li>
               <li><a href="/calculator" className="hover:text-foreground transition-colors">Calculadora</a></li>
               <li><a href="/gallery" className="hover:text-foreground transition-colors">Galeria</a></li>
               <li><a href="/testimonials" className="hover:text-foreground transition-colors">Depoimentos</a></li>
-              <li><a href="/faq" className="hover:text-foreground transition-colors">FAQ</a></li>
             </ul>
           </div>
 
@@ -67,7 +67,7 @@ export function Footer() {
               </div>
               <div className="flex items-start gap-2">
                 <Mail className="h-4 w-4 mt-1 flex-shrink-0" />
-                <p>contato@autocleanshinepro.com</p>
+                <p>contato@autolimpezapro.com</p>
               </div>
             </div>
           </div>
@@ -98,7 +98,7 @@ export function Footer() {
         <div className="border-t border-border/50 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-muted-foreground text-sm">
-              © 2024 Auto Clean Shine Pro. Todos os direitos reservados.
+              © 2024 Auto Limpeza Pro. Todos os direitos reservados.
             </p>
             <div className="flex gap-4 text-sm text-muted-foreground">
               <a href="/maintenance" className="hover:text-foreground transition-colors">

@@ -14,11 +14,11 @@ import {
 
 const navItems = [
   { href: "/", label: "Início", icon: Home },
-  { href: "/services", label: "Serviços", icon: Sparkles },
+  { href: "/services", label: "Serviços Auto", icon: Sparkles },
+  { href: "/marido-aluguel", label: "Marido de Aluguel", icon: Sparkles },
   { href: "/gallery", label: "Galeria", icon: Star },
   { href: "/calculator", label: "Calculadora", icon: Car },
   { href: "/testimonials", label: "Depoimentos", icon: User },
-  { href: "/maintenance", label: "Manutenção", icon: Sparkles },
   { href: "/contact", label: "Contato", icon: Calendar },
   { href: "/booking", label: "Agendar", icon: Calendar },
 ];
@@ -55,7 +55,7 @@ export function Navigation() {
       <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between bg-card/80 backdrop-blur-md border-b border-border/50 p-4 md:hidden">
         <div className="flex items-center gap-2">
           <Car className="h-6 w-6 text-primary" />
-          <span className="text-lg font-bold gradient-text">Auto Clean Shine</span>
+          <span className="text-lg font-bold gradient-text">Auto Limpeza Pro</span>
         </div>
         
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -68,7 +68,7 @@ export function Navigation() {
             <div className="mb-6">
               <div className="flex items-center gap-2">
                 <Car className="h-6 w-6 text-primary" />
-                <span className="text-lg font-bold gradient-text">Auto Clean Shine</span>
+                <span className="text-lg font-bold gradient-text">Auto Limpeza Pro</span>
               </div>
             </div>
             <NavContent />
@@ -81,10 +81,10 @@ export function Navigation() {
         <div className="mb-8">
           <div className="flex items-center gap-2">
             <Car className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold gradient-text">Auto Clean Shine</span>
+            <span className="text-xl font-bold gradient-text">Auto Limpeza Pro</span>
           </div>
           <p className="text-sm text-muted-foreground mt-2">
-            Premium Car Detailing
+            Higienização • Estética • Marido de Aluguel
           </p>
         </div>
         

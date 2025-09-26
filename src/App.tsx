@@ -15,6 +15,7 @@ import Contact from "./pages/Contact";
 import Calculator from "./pages/Calculator";
 import FAQ from "./pages/FAQ";
 import Maintenance from "./pages/Maintenance";
+import MaridoAluguel from "./pages/MaridoAluguel";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Switch>
             <Route path="/" component={Home} />
             <Route path="/services" component={Services} />
+            <Route path="/marido-aluguel" component={MaridoAluguel} />
             <Route path="/booking" component={Booking} />
             <Route path="/gallery" component={Gallery} />
             <Route path="/testimonials" component={Testimonials} />
