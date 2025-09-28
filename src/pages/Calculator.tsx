@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calculator as CalculatorIcon, Clock, DollarSign, Car, Zap, AlertTriangle } from "lucide-react";
+import { useLocation } from "wouter";
+import { useToast } from "@/hooks/use-toast";
+import { Calculator as CalculatorIcon, Clock, DollarSign, Car, Zap, AlertTriangle, CheckCircle } from "lucide-react";
 
 interface CalculatorState {
   service: string;
@@ -16,14 +18,14 @@ interface CalculatorState {
 }
 
 const services = [
-  { id: "1", name: "Lavagem Simples", basePrice: 25.90, duration: 30 },
-  { id: "2", name: "Lavagem Completa", basePrice: 45.90, duration: 45 },
-  { id: "3", name: "Detailing Interno", basePrice: 65.90, duration: 75 },
-  { id: "4", name: "Detailing Premium", basePrice: 89.90, duration: 150 },
-  { id: "5", name: "Enceramento Simples", basePrice: 75.90, duration: 90 },
-  { id: "6", name: "Enceramento & Polimento", basePrice: 129.90, duration: 180 },
-  { id: "7", name: "Pacote Executivo", basePrice: 199.90, duration: 240 },
-  { id: "8", name: "Lavagem Express", basePrice: 19.90, duration: 20 }
+  { id: "1", name: "Lavagem Completa", basePrice: 80.00, duration: 45 },
+  { id: "2", name: "Detailing Premium", basePrice: 130.00, duration: 150 },
+  { id: "3", name: "Enceramento & Polimento", basePrice: 180.00, duration: 180 },
+  { id: "4", name: "Lavagem Express", basePrice: 35.00, duration: 20 },
+  { id: "5", name: "Lavagem Simples", basePrice: 45.00, duration: 30 },
+  { id: "6", name: "Detailing Interno", basePrice: 85.00, duration: 75 },
+  { id: "7", name: "Enceramento Simples", basePrice: 110.00, duration: 90 },
+  { id: "8", name: "Pacote Executivo", basePrice: 250.00, duration: 240 }
 ];
 
 const carSizes = [
@@ -46,13 +48,18 @@ const scheduleOptions = [
 ];
 
 const addons = [
-  { id: "perfume", name: "Perfume Automotivo", price: 15.0 },
-  { id: "tire-shine", name: "Brilho nos Pneus", price: 20.0 },
-  { id: "engine-wash", name: "Lavagem do Motor", price: 35.0 },
-  { id: "leather-care", name: "Hidratação do Couro", price: 45.0 }
+  { id: "perfume", name: "Perfume Automotivo Premium", price: 20.0 },
+  { id: "tire-shine", name: "Brilho e Proteção nos Pneus", price: 25.0 },
+  { id: "engine-wash", name: "Lavagem Completa do Motor", price: 45.0 },
+  { id: "leather-care", name: "Hidratação e Proteção do Couro", price: 60.0 },
+  { id: "ceramic-coating", name: "Proteção Cerâmica", price: 150.0 },
+  { id: "interior-perfume", name: "Aromatização Interna", price: 30.0 }
 ];
 
 export default function Calculator() {
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
+  
   const [calculator, setCalculator] = useState<CalculatorState>({
     service: '',
     carSize: '',
@@ -63,40 +70,51 @@ export default function Calculator() {
 
   const [estimatedPrice, setEstimatedPrice] = useState<number>(0);
   const [estimatedDuration, setEstimatedDuration] = useState<number>(0);
+  const [isCalculating, setIsCalculating] = useState<boolean>(false);
 
   const calculatePrice = () => {
-    if (!calculator.service || !calculator.carSize) {
-      setEstimatedPrice(0);
-      setEstimatedDuration(0);
-      return;
-    }
+    setIsCalculating(true);
+    
+    // Add a small delay to show loading state
+    setTimeout(() => {
+      if (!calculator.service || !calculator.carSize) {
+        setEstimatedPrice(0);
+        setEstimatedDuration(0);
+        setIsCalculating(false);
+        return;
+      }
 
-    const selectedService = services.find(s => s.id === calculator.service);
-    const selectedCarSize = carSizes.find(c => c.id === calculator.carSize);
-    const urgencyMultiplier = urgencyOptions.find(u => u.id === calculator.urgency)?.multiplier || 1;
-    const scheduleMultiplier = scheduleOptions.find(s => s.id === calculator.schedule)?.multiplier || 1;
+      const selectedService = services.find(s => s.id === calculator.service);
+      const selectedCarSize = carSizes.find(c => c.id === calculator.carSize);
+      const urgencyMultiplier = urgencyOptions.find(u => u.id === calculator.urgency)?.multiplier || 1;
+      const scheduleMultiplier = scheduleOptions.find(s => s.id === calculator.schedule)?.multiplier || 1;
 
-    if (!selectedService || !selectedCarSize) return;
+      if (!selectedService || !selectedCarSize) {
+        setIsCalculating(false);
+        return;
+      }
 
-    let basePrice = selectedService.basePrice;
-    let baseDuration = selectedService.duration;
+      let basePrice = selectedService.basePrice;
+      let baseDuration = selectedService.duration;
 
-    // Apply car size multiplier
-    basePrice *= selectedCarSize.multiplier;
-    baseDuration *= selectedCarSize.multiplier;
+      // Apply car size multiplier
+      basePrice *= selectedCarSize.multiplier;
+      baseDuration *= selectedCarSize.multiplier;
 
-    // Apply urgency and schedule multipliers
-    basePrice *= urgencyMultiplier;
-    basePrice *= scheduleMultiplier;
+      // Apply urgency and schedule multipliers
+      basePrice *= urgencyMultiplier;
+      basePrice *= scheduleMultiplier;
 
-    // Add addon prices
-    const addonPrice = calculator.addons.reduce((total, addonId) => {
-      const addon = addons.find(a => a.id === addonId);
-      return total + (addon?.price || 0);
-    }, 0);
+      // Add addon prices
+      const addonPrice = calculator.addons.reduce((total, addonId) => {
+        const addon = addons.find(a => a.id === addonId);
+        return total + (addon?.price || 0);
+      }, 0);
 
-    setEstimatedPrice(basePrice + addonPrice);
-    setEstimatedDuration(Math.ceil(baseDuration));
+      setEstimatedPrice(basePrice + addonPrice);
+      setEstimatedDuration(Math.ceil(baseDuration));
+      setIsCalculating(false);
+    }, 300);
   };
 
   useEffect(() => {
@@ -112,16 +130,50 @@ export default function Calculator() {
     }));
   };
 
+  const handleBookService = () => {
+    if (!calculator.service || !calculator.carSize) {
+      toast({
+        title: "Campos obrigatórios",
+        description: "Selecione um serviço e o tamanho do veículo para continuar.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Store calculation data in localStorage for the booking page
+    localStorage.setItem('calculatedService', JSON.stringify({
+      service: calculator.service,
+      carSize: calculator.carSize,
+      urgency: calculator.urgency,
+      schedule: calculator.schedule,
+      addons: calculator.addons,
+      estimatedPrice,
+      estimatedDuration
+    }));
+
+    toast({
+      title: "Orçamento calculado!",
+      description: "Redirecionando para o agendamento...",
+    });
+
+    // Navigate to booking page with service parameter
+    setLocation(`/booking?service=${calculator.service}&calculated=true`);
+  };
+
   return (
     <div className="min-h-screen py-8 px-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
+          <Badge variant="outline" className="mb-4">
+            <CalculatorIcon className="h-4 w-4 mr-1" />
+            Calculadora Inteligente
+          </Badge>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Calculadora de Preços
+            <span className="gradient-text">Calculadora de Preços</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Calcule o valor estimado para o seu serviço personalizado
+            Configure seu serviço personalizado e receba um orçamento detalhado em tempo real
           </p>
         </div>
 
@@ -236,22 +288,32 @@ export default function Calculator() {
             {/* Addons */}
             <Card className="bg-card/50 border-border/50">
               <CardHeader>
-                <CardTitle>Serviços Adicionais</CardTitle>
+                <CardTitle>Serviços Adicionais Opcionais</CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  Selecione os adicionais para personalizar ainda mais seu serviço
+                </p>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {addons.map((addon) => (
                     <div
                       key={addon.id}
-                      className={`p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all hover:scale-[1.02] ${
                         calculator.addons.includes(addon.id)
-                          ? "border-primary bg-primary/5"
+                          ? "border-primary bg-primary/5 shadow-md"
                           : "border-border hover:border-primary/50"
                       }`}
                       onClick={() => toggleAddon(addon.id)}
                     >
-                      <div className="flex justify-between items-center">
-                        <h4 className="font-medium">{addon.name}</h4>
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            {calculator.addons.includes(addon.id) && (
+                              <CheckCircle className="h-4 w-4 text-primary" />
+                            )}
+                            <h4 className="font-medium">{addon.name}</h4>
+                          </div>
+                        </div>
                         <span className="font-semibold text-primary">
                           +R$ {addon.price.toFixed(2)}
                         </span>
@@ -275,42 +337,57 @@ export default function Calculator() {
               <CardContent className="space-y-4">
                 {calculator.service && calculator.carSize ? (
                   <>
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center mb-4">
                       <span>Valor Estimado:</span>
-                      <span className="text-2xl font-bold text-primary">
-                        R$ {estimatedPrice.toFixed(2)}
+                      <span className={`text-2xl font-bold text-primary transition-all duration-300 ${isCalculating ? 'opacity-50' : 'opacity-100'}`}>
+                        {isCalculating ? 'Calculando...' : `R$ ${estimatedPrice.toFixed(2)}`}
                       </span>
                     </div>
                     
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center mb-4">
                       <span>Duração Estimada:</span>
                       <Badge variant="secondary">
                         <Clock className="h-3 w-3 mr-1" />
-                        {estimatedDuration} min
+                        {isCalculating ? '...' : `${estimatedDuration} min`}
                       </Badge>
                     </div>
 
-                    <div className="border-t pt-4 space-y-2 text-sm">
+                    <div className="border-t pt-4 space-y-3 text-sm">
                       {calculator.service && (
                         <div className="flex justify-between">
-                          <span>Serviço Base:</span>
-                          <span>{services.find(s => s.id === calculator.service)?.name}</span>
+                          <span className="text-muted-foreground">Serviço:</span>
+                          <span className="font-medium">{services.find(s => s.id === calculator.service)?.name}</span>
                         </div>
                       )}
                       {calculator.carSize && (
                         <div className="flex justify-between">
-                          <span>Veículo:</span>
-                          <span>{carSizes.find(c => c.id === calculator.carSize)?.name}</span>
+                          <span className="text-muted-foreground">Veículo:</span>
+                          <span className="font-medium">{carSizes.find(c => c.id === calculator.carSize)?.name}</span>
+                        </div>
+                      )}
+                      {calculator.urgency !== 'normal' && (
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Urgência:</span>
+                          <span className="font-medium">{urgencyOptions.find(u => u.id === calculator.urgency)?.name}</span>
+                        </div>
+                      )}
+                      {calculator.schedule !== 'commercial' && (
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Horário:</span>
+                          <span className="font-medium">{scheduleOptions.find(s => s.id === calculator.schedule)?.name}</span>
                         </div>
                       )}
                       {calculator.addons.length > 0 && (
                         <div>
-                          <span>Adicionais:</span>
-                          <ul className="text-muted-foreground ml-2">
+                          <span className="text-muted-foreground">Adicionais ({calculator.addons.length}):</span>
+                          <ul className="text-muted-foreground ml-2 mt-1">
                             {calculator.addons.map(addonId => {
                               const addon = addons.find(a => a.id === addonId);
                               return (
-                                <li key={addonId}>• {addon?.name}</li>
+                                <li key={addonId} className="flex justify-between">
+                                  <span>• {addon?.name}</span>
+                                  <span className="text-primary font-medium">+R$ {addon?.price.toFixed(2)}</span>
+                                </li>
                               );
                             })}
                           </ul>
@@ -318,16 +395,30 @@ export default function Calculator() {
                       )}
                     </div>
 
-                    <Button variant="premium" size="lg" className="w-full">
-                      <DollarSign className="h-4 w-4 mr-2" />
-                      Agendar Serviço
-                    </Button>
+                    <div className="mt-6 space-y-3">
+                      <Button 
+                        variant="premium" 
+                        size="lg" 
+                        className="w-full" 
+                        onClick={handleBookService}
+                        disabled={isCalculating}
+                      >
+                        <DollarSign className="h-4 w-4 mr-2" />
+                        {isCalculating ? 'Calculando...' : 'Agendar este Serviço'}
+                      </Button>
+                      <p className="text-xs text-center text-muted-foreground">
+                        * Valores sujeitos a variação conforme condições do veículo
+                      </p>
+                    </div>
                   </>
                 ) : (
                   <div className="text-center py-8">
                     <AlertTriangle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-muted-foreground">
-                      Selecione um serviço e o tamanho do veículo para ver o orçamento
+                    <p className="text-muted-foreground mb-2 font-medium">
+                      Configure sua cotação
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Selecione um serviço e o tamanho do veículo para ver o orçamento personalizado
                     </p>
                   </div>
                 )}
