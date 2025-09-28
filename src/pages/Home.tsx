@@ -24,6 +24,7 @@ import heroImage from "@/assets/hero-image.jpg";
 import exteriorWash from "@/assets/exterior-wash.jpg";
 import interiorDetail from "@/assets/interior-detail.jpg";
 import waxPolish from "@/assets/wax-polish.jpg";
+import estofadoDestaque from "@/assets/estofado-destaque.jpg";
 
 const services = [
   {
@@ -91,8 +92,8 @@ export default function Home() {
             </Badge>
             
             <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-              Seu carro merece o
-              <span className="gradient-text block">melhor cuidado</span>
+              <span className="gradient-text block">Estofados Premium</span>
+              & Estética Automotiva
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
@@ -140,6 +141,43 @@ export default function Home() {
                 </Card>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Destaque Estofados */}
+      <section className="py-16 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <Badge variant="outline" className="mb-4">
+                <Sparkles className="h-4 w-4 mr-1" />
+                Especialidade
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                <span className="gradient-text">Higienização Profissional</span> de Estofados
+              </h2>
+              <p className="text-lg text-muted-foreground mb-6">
+                Transformamos o interior do seu veículo com técnicas avançadas de higienização, 
+                removendo manchas, odores e devolvendo o aspecto de novo aos seus estofados.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button variant="premium" onClick={() => setLocation("/services")}>
+                  Ver Serviços
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" onClick={() => setLocation("/booking")}>
+                  Agendar Agora
+                </Button>
+              </div>
+            </div>
+            <div className="relative">
+              <img
+                src={estofadoDestaque}
+                alt="Higienização profissional de estofados automotivos"
+                className="rounded-lg shadow-xl w-full h-[400px] object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
