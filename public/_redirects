@@ -1,0 +1,5 @@
+# Redirects for Netlify and similar services
+/*    /index.html   200
+
+# For Apache servers (cPanel)
+# Add this to .htaccess file
