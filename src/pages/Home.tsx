@@ -92,13 +92,13 @@ export default function Home() {
             </Badge>
             
             <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-              <span className="gradient-text block">Estofados Premium</span>
-              & Estética Automotiva
+              <span className="gradient-text block">Higienização de Estofados</span>
+              Que Remove o Impossível
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-              Serviços profissionais de higienização de estofados, estética automotiva 
-              e marido de aluguel. Agende seu horário e deixe tudo impecável.
+              Elimine manchas, odores e sujeiras profundas! Especialistas em devolver 
+              o aspecto de novo aos estofados do seu carro. Resultados visíveis garantidos.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
