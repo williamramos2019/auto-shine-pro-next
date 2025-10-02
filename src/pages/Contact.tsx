@@ -18,15 +18,20 @@ interface ContactForm {
 }
 
 const services = [
-  "Lavagem Simples",
-  "Lavagem Completa", 
-  "Detailing Interno",
-  "Detailing Premium",
-  "Enceramento Simples",
-  "Enceramento & Polimento",
-  "Pacote Executivo",
-  "Lavagem Express",
+  "Higienização de Estofados Automotivos",
+  "Higienização de Colchões",
+  "Higienização de Sofás",
+  "Higienização de Cadeiras e Poltronas",
+  "Higienização de Carpetes e Tapetes",
+  "Higienização de Cortinas",
+  "Polimento Técnico",
+  "Cristalização de Pintura",
+  "Vitrificação Premium",
+  "Revitalização de Faróis",
+  "Hidratação de Couro",
+  "Ozonização",
   "Serviços Elétricos",
+  "Hidráulica Residencial",
   "Pintura e Acabamentos", 
   "Montagem e Instalação",
   "Reparos Gerais",
@@ -100,8 +105,8 @@ export default function Contact() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-2">Ligue para nós:</p>
-                <p className="font-semibold">(11) 99999-9999</p>
-                <p className="font-semibold">(11) 3333-3333</p>
+                <p className="font-semibold">(31) 98025-2882</p>
+                <p className="font-semibold">(31) 3715-1234</p>
               </CardContent>
             </Card>
 
@@ -152,17 +157,20 @@ export default function Contact() {
               </CardHeader>
               <CardContent className="space-y-3">
                 <div>
-                  <p className="font-semibold">Unidade Centro</p>
+                  <p className="font-semibold">São José da Lapa - MG</p>
                   <p className="text-sm text-muted-foreground">
-                    Rua das Flores, 123 - Centro<br/>
-                    São Paulo - SP
+                    Atendemos toda região de São José da Lapa
                   </p>
                 </div>
-                <div>
-                  <p className="font-semibold">Unidade Zona Sul</p>
+                <div className="pt-2 border-t border-border/50">
+                  <p className="font-semibold text-sm mb-2">Região de Atendimento:</p>
                   <p className="text-sm text-muted-foreground">
-                    Av. Paulista, 456 - Bela Vista<br/>
-                    São Paulo - SP
+                    • São José da Lapa<br/>
+                    • Confins<br/>
+                    • Vespasiano<br/>
+                    • Pedro Leopoldo<br/>
+                    • Lagoa Santa<br/>
+                    • Região Metropolitana de BH
                   </p>
                 </div>
               </CardContent>
@@ -197,7 +205,7 @@ export default function Contact() {
                         id="phone"
                         value={formData.phone}
                         onChange={(e) => handleInputChange('phone', e.target.value)}
-                        placeholder="(11) 99999-9999"
+                        placeholder="(31) 99999-9999"
                         required
                       />
                     </div>
@@ -221,7 +229,7 @@ export default function Contact() {
                         id="city"
                         value={formData.city}
                         onChange={(e) => handleInputChange('city', e.target.value)}
-                        placeholder="São Paulo"
+                        placeholder="São José da Lapa"
                       />
                     </div>
                   </div>

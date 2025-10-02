@@ -65,6 +65,16 @@ const maridoServices = [
     rating: 4.8,
     icon: Wrench,
     items: ["Vistoria geral", "Lubrificação", "Ajustes preventivos", "Relatório de manutenção"]
+  },
+  {
+    id: "marido-6",
+    name: "Hidráulica Residencial",
+    description: "Reparos em torneiras, canos, descargas e pequenos vazamentos",
+    price: 120.00,
+    duration: "1-3h",
+    rating: 4.8,
+    icon: Settings,
+    items: ["Conserto de vazamentos", "Troca de torneiras", "Regulagem de descargas", "Desentupimentos simples"]
   }
 ];
 

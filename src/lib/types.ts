@@ -6,7 +6,7 @@ export interface Service {
   duration: string;
   rating: number;
   image: string;
-  category: "express" | "external" | "internal" | "complete" | "protection" | "premium";
+  category: "higienizacao" | "estetica" | "express" | "completa";
   isPopular?: boolean;
 }
 
